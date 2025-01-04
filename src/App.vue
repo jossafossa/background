@@ -11,6 +11,10 @@ https://i.redd.it/ux37hvvhstf51.jpg
 `
 );
 
+const refresh = () => {
+  window.location.reload();
+};
+
 const storeImages = () => {
   localStorage.setItem("images", rawImages.value);
 };
@@ -70,7 +74,10 @@ setInterval(() => showNext(), interval);
 </script>
 
 <template>
-  <button class="edit" @click="menuVisible = !menuVisible">edit</button>
+  <div class="buttons">
+    <button @click="menuVisible = !menuVisible">edit</button>
+    <button @click="refresh">refresh</button>
+  </div>
   <textarea
     class="textarea"
     v-if="menuVisible"
@@ -167,15 +174,7 @@ setInterval(() => showNext(), interval);
 .visible {
   opacity: 1;
   transition: var(--transition) ease;
-  animation: translate var(--interval) forwards;
-}
-
-.edit {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 16px;
-  z-index: 1000;
+  animation: translate var(--interval) ease forwards;
 }
 
 .textarea {
@@ -185,5 +184,31 @@ setInterval(() => showNext(), interval);
   width: 100%;
   max-width: 500px;
   height: 100%;
+  inset: 0;
+  border: 0;
+  padding: 1rem;
+  max-height: calc(100vh - 32px);
+}
+
+.buttons {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+button {
+  padding: 4px 8px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
 }
 </style>
